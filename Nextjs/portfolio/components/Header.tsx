@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { links } from '@/lib/data';
 import Link from 'next/link';
 import clsx from 'clsx';
 
+import { useActiveSection } from '@/context/active-section';
+
 const Header = () => {
-  const [activeSection, setActiveSection] = useState('Home');
+  const { activeSection, setActiveSection, setTimeOfLastClick } =
+    useActiveSection();
 
   return (
     <header className='z-[999] relative'>
@@ -31,7 +33,10 @@ const Header = () => {
                   'flex w-full items-center justify-center px-3 py-3 hover:text-gray-950 transition',
                   { 'text-gray-950': activeSection === link.name }
                 )}
-                onClick={() => setActiveSection(link.name)}
+                onClick={() => {
+                  setActiveSection(link.name);
+                  setTimeOfLastClick(Date.now());
+                }}
               >
                 {link.name}
                 {activeSection === link.name && (
