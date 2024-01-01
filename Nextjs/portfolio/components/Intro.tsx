@@ -5,9 +5,11 @@ import { HiDownload } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useSectionInView } from '@/lib/hooks';
+import { useActiveSection } from '@/context/active-section';
 
 const Intro = () => {
   const { ref } = useSectionInView('Home', 0.5);
+  const {setActiveSection, setTimeOfLastClick} = useActiveSection()
 
   return (
     <section
@@ -69,12 +71,13 @@ const Intro = () => {
         <Link
           href='/contact'
           className='group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 transition-transform hover:bg-gray-950 active:scale-105'
+          onClick={() =>  {setActiveSection("Contact"); setTimeOfLastClick(Date.now())}}
         >
           Contact me
           <BsArrowRight className='opacity-70 group-hover:translate-x-1 transition' />
         </Link>
         <a
-          className='group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 transition-transform active:scale-105 cursor-pointer border border-black/10'
+          className='group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 transition-transform active:scale-105 cursor-pointer borderBlack dark:bg-white/10'
           href='/CV.pdf'
           download
         >
@@ -82,14 +85,14 @@ const Intro = () => {
           <HiDownload className='opacity-60 group-hover:transalte-y-1 transition' />
         </a>
         <a
-          className='bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 transition-transform active:scale-105 cursor-pointer border border-black/10'
+          className='bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 transition-transform active:scale-105 cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60'
           href='https://www.linkedin.com/in/kamal-chaoui-1b1b3b1b0/'
           target='_blank'
         >
           <BsLinkedin />
         </a>
         <a
-          className='bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 transition-transform active:scale-105 cursor-pointer border border-black/10'
+          className='bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 transition-transform active:scale-105 cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60'
           href='http://www.github.com/kamalchaoui'
           target='_blank'
         >
