@@ -11,12 +11,12 @@ interface InputBoxProps {
   name: string
   type: string
   id: string
-  value: string
   placeholder: string
+  value?: string
   onChange?: (e: any) => void
 }
 
-const InputBox = ({ name, type, id, value, placeholder }: InputBoxProps) => {
+const InputBox = ({ name, type, id, placeholder, value }: InputBoxProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   return (
@@ -27,8 +27,8 @@ const InputBox = ({ name, type, id, value, placeholder }: InputBoxProps) => {
           type == 'password' ? (passwordVisible ? 'text' : 'password') : 'type'
         }
         id={id}
-        defaultValue={value}
         placeholder={placeholder}
+        defaultValue={value}
         className='input-box'
       />
       {type === 'text' && <AiOutlineUser className='input-icon' />}

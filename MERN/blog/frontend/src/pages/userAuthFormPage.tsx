@@ -3,6 +3,9 @@ import InputBox from '../components/InputComponent'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import AnimationWrapper from '../common/pageAnimation'
+import { inputValidation } from '../validation/inputvalidation'
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 interface FormData {
   fullname: string
@@ -17,23 +20,78 @@ const UserAuthForm = ({ type }: { type: string }) => {
     password: '',
   })
 
+  console.log(formData)
+
+  /*   
+  const auth = useRef()
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = new FormData(auth.current!)
+    const formData: { [key: string]: any } = {} // Define the type of formData object
+    for (let [key, value] of form.entries()) {
+      formData[key] = value
+    }
+    console.log(formData)
+  } */
+
+  const handleInputChange = (event: { target: { name: string; value: string } }) => {
+    console.log(event.target.name, event.target.value)
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (type === 'sign-in') {
+      const signInData = { email: formData.email, password: formData.password }
+      inputValidation(
+        type,
+        formData.fullname,
+        formData.email,
+        formData.password
+      )
+      const res = await axios.post(
+        'http://localhost:8000/auth/signin',
+        signInData
+      )
+      if (res) {
+        toast.success('Login success')
+      }
+    } else {
+      inputValidation(
+        type,
+        formData.fullname,
+        formData.email,
+        formData.password
+      )
+      const res = await axios.post(
+        'http://localhost:8000/auth/signup',
+        formData
+      )
+      if (res) {
+        toast.success('Signup success')
+      }
+    }
+  }
+
   return (
     <AnimationWrapper keyvalue={type}>
       <section className='h-cover flex items-center justify-center'>
-        <form className='w-[80%] max-w-[400px]'>
+        <form className='w-[80%] max-w-[400px]' onSubmit={handleSubmitForm}>
           <h1 className='text-4xl font-gelasio capitalize text-center mb-24'>
             {type == 'sign-in' ? 'Wellcome back' : 'Join us today'}
           </h1>
           {type !== 'sign-in' ? (
             <InputBox
               name='fullname'
-              id='name'
               type='text'
+              id='fullname'
               placeholder='Full Name'
-              onChange={(e) =>
-                setFormData({ ...formData, fullname: e.target.value })
-              }
               value={formData.fullname}
+              onChange={handleInputChange}
             />
           ) : (
             ''
@@ -41,22 +99,18 @@ const UserAuthForm = ({ type }: { type: string }) => {
           <InputBox
             name='email'
             type='email'
-            placeholder='Email'
             id='email'
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            placeholder='Email'
             value={formData.email}
+            onChange={handleInputChange}
           />
           <InputBox
             name='password'
             type='password'
-            placeholder='Password'
             id='password'
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
+            placeholder='Password'
             value={formData.password}
+            onChange={handleInputChange}
           />
           <button className='btn-dark w-full mt-8' type='submit'>
             {type.replace('-', ' ')}
