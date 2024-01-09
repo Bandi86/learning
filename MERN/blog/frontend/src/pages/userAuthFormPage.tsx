@@ -22,19 +22,9 @@ const UserAuthForm = ({ type }: { type: string }) => {
 
   console.log(formData)
 
-  /*   
-  const auth = useRef()
-  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = new FormData(auth.current!)
-    const formData: { [key: string]: any } = {} // Define the type of formData object
-    for (let [key, value] of form.entries()) {
-      formData[key] = value
-    }
-    console.log(formData)
-  } */
-
-  const handleInputChange = (event: { target: { name: string; value: string } }) => {
+  const handleInputChange = (event: {
+    target: { name: string; value: string }
+  }) => {
     console.log(event.target.name, event.target.value)
     setFormData({
       ...formData,
