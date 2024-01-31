@@ -34,8 +34,13 @@ restart the dev server
 
 backend:
 `npm init -y`
-`npm i express dotenv mongodb mongoose cors`
+`npm i express dotenv mongodb mongoose cors bcrypt`
 
 change package.json type module and scripts to dev: "nodemon index.js"
 
+create index.js
 connect to mongodb
+
+create model and routes
+middleware handling error
+1:46
