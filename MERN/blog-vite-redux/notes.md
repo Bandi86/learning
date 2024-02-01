@@ -34,7 +34,7 @@ restart the dev server
 
 backend:
 `npm init -y`
-`npm i express dotenv mongodb mongoose cors bcrypt`
+`npm i express dotenv mongodb mongoose cors bcrypt jsonwebtoken`
 
 change package.json type module and scripts to dev: "nodemon index.js"
 
@@ -43,4 +43,13 @@ connect to mongodb
 
 create model and routes
 middleware handling error
-1:46
+
+create register page ui
+config proxy vite.config
+
+creating footer
+
+create login api
+create login ui
+
+2:52

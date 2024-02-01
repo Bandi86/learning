@@ -5,7 +5,6 @@ import db from './db/connect.js'
 import postRouter from './routes/post.js'
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
-import errorMiddleware from './middlewares/error.js'
 
 const app = express()
 
@@ -15,11 +14,19 @@ app.use(express.json())
 
 const PORT = process.env.PORT
 
-app.use(errorMiddleware)
-
 app.use('/api/users', userRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/auth', authRouter)
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500
+  const message =
+    err.message || 'Internal Server Error'
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  })
+})
 
 const start = async () => {
   try {
