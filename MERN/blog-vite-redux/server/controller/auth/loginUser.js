@@ -2,6 +2,7 @@ import User from '../../model/user.model.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { errorHandler } from '../../utils/error.js'
+import generateToken from '../../utils/generateToken.js'
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body
@@ -26,13 +27,23 @@ const loginUser = async (req, res, next) => {
     }
 
     // check if user already have token
-    if (req.cookies.token) {
-      return next(
-        errorHandler(
-          400,
-          'User already logged in.'
+    if (req.cookies && req.cookies.token) {
+      try {
+        jwt.verify(
+          req.cookies.token,
+          process.env.JWT_SECRET
         )
-      )
+        return next(
+          errorHandler(
+            400,
+            'User already logged in.'
+          )
+        )
+      } catch (error) {
+        return next(
+          errorHandler(401, 'Invalid token.')
+        )
+      }
     }
 
     // compare the password
@@ -50,21 +61,8 @@ const loginUser = async (req, res, next) => {
       )
     }
 
-    // create token for user
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: '30d',
-      }
-    )
-
-    // send token in cookie
-    res.cookie('token', token, {
-      httpOnly: true,
-    })
+    // generate token
+    generateToken(res, user._id)
 
     // send response
     res.status(200).json({

@@ -12,6 +12,15 @@ import {
   useNavigate,
 } from 'react-router-dom'
 import { login } from '../api'
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from '../store/user/userSlice'
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux'
 
 type FormData = {
   email: string
@@ -20,17 +29,15 @@ type FormData = {
 
 const SignIn = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { loading, error: errorMessage } =
+    useSelector((state: any) => state.user)
 
   const [formData, setFormData] =
     useState<FormData>({
       email: '',
       password: '',
     })
-
-  const [errorMessage, setErrorMessage] =
-    useState<string | null>(null)
-
-  const [loading, setLoading] = useState(false)
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -45,30 +52,34 @@ const SignIn = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault()
+    dispatch(signInStart())
     if (!formData.email || !formData.password) {
-      return setErrorMessage(
-        'Please fill all fields'
+      return dispatch(
+        signInFailure('Please fill all fields')
       )
     }
     try {
-      setLoading(true)
-      setErrorMessage(null)
+      dispatch(signInStart())
       const res = await axios.post(
         login,
-        formData
+        formData,
+        {
+          withCredentials: true,
+        }
       )
 
-      setLoading(false)
-      if (res.data.success === false)
-        return setErrorMessage(res.data.message)
+      if (res.status !== 200) {
+        dispatch(signInFailure(res.data.message))
+        alert(res.data.message)
+      }
 
       if (res.status === 200) {
+        dispatch(signInSuccess(res.data.user))
         alert('You have successfully logged in')
         navigate('/')
       }
     } catch (error: any) {
-      setErrorMessage(error.message)
-      setLoading(false)
+      dispatch(signInFailure(error.message))
     }
   }
 

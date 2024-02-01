@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import db from './db/connect.js'
 import postRouter from './routes/post.js'
@@ -9,8 +11,25 @@ import authRouter from './routes/auth.js'
 const app = express()
 
 dotenv.config()
-app.use(cors())
+app.use(bodyParser.json())
+app.use(cookieParser())
+dotenv.config()
+
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
+}
+
+app.use(cors(corsOptions))
+
+// parse requests of content-type - application/json
 app.use(express.json())
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
 
 const PORT = process.env.PORT
 

@@ -34,7 +34,7 @@ restart the dev server
 
 backend:
 `npm init -y`
-`npm i express dotenv mongodb mongoose cors bcrypt jsonwebtoken`
+`npm i express dotenv mongodb mongoose cors bcrypt jsonwebtoken cookie-parser body-parser`
 
 change package.json type module and scripts to dev: "nodemon index.js"
 
@@ -52,4 +52,20 @@ creating footer
 create login api
 create login ui
 
-2:52
+redux:
+npm install react-redux
+npm install --save @types/react-redux
+npm install @reduxjs/toolkit
+store
+
+provide to main file
+create userSlice
+
+redux persist to save information local
+npm i redux-persist
+
+combine reducers
+add to main the created persist with persistGate
+
+adding google auth
+3:14
