@@ -53,19 +53,51 @@ create login api
 create login ui
 
 redux:
+
+```
 npm install react-redux
 npm install --save @types/react-redux
 npm install @reduxjs/toolkit
+```
+
 store
 
 provide to main file
 create userSlice
 
 redux persist to save information local
-npm i redux-persist
+`npm i redux-persist`
 
 combine reducers
 add to main the created persist with persistGate
 
 adding google auth
-3:14
+create project on firebase
+`npm install firebase`
+.env to save firebase apikey important to save in root
+use it like that: apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+
+create new route for google
+
+update the header
+
+dark mode theme implementing
+provide in main after themeProvider created
+import dispatch and toogle to header and use onclick fn on button
+
+profile page ui
+make private
+use location to get info what tab wee are
+
+upload image functionality
+build storage on firebase for image saving
+add rules:
+
+```
+allow read;
+allow write: if
+request.resource.size < 2 * 1024 * 1024 &&
+request.resource.contentType.matches('image/.*')
+```
+
+4:32

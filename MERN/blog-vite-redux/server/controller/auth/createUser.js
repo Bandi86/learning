@@ -10,28 +10,16 @@ const createUser = async (req, res, next) => {
   try {
     // if no username, email or password
     if (!username || !email || !realPassword) {
-      next(
-        errorHandler(
-          400,
-          'Please fill all fields.'
-        )
-      )
+      next(errorHandler(400, 'Please fill all fields.'))
     }
 
     // hash password
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(
-      realPassword,
-      salt
-    )
+    const hashedPassword = await bcrypt.hash(realPassword, salt)
 
     const password = hashedPassword
 
-    const user = await User.create({
-      username,
-      email,
-      password,
-    })
+    const user = await User.create({ username, email, password })
 
     const sendBackData = {
       username: user.username,
@@ -41,10 +29,7 @@ const createUser = async (req, res, next) => {
 
     res
       .status(201)
-      .json({
-        message: 'User created',
-        user: sendBackData,
-      })
+      .json({ message: 'User created', user: sendBackData })
     console.log(user, 'user created')
   } catch (error) {
     next(error)

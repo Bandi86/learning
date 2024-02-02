@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { register } from '../api'
 import { useNavigate } from 'react-router-dom'
+import OAuth from '../components/OAuth'
 
 type FormData = {
   username: string
@@ -143,6 +144,7 @@ const SignUp = () => {
                 <span>Sign Up</span>
               )}
             </Button>
+            <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>
             <span>Have an account?</span>
