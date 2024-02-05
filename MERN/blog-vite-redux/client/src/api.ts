@@ -4,4 +4,8 @@ const register =
 const login =
   'http://localhost:8000/api/auth/login'
 
-export { register, login }
+const userApi = 'http://localhost:8000/api/user'
+  
+const logOut = 'http://localhost:8000/api/auth/logout'
+
+export { register, login, userApi, logOut }

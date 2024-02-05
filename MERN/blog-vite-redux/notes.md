@@ -83,7 +83,7 @@ update the header
 
 dark mode theme implementing
 provide in main after themeProvider created
-import dispatch and toogle to header and use onclick fn on button
+import dispatch and toggle to header and use onclick fn on button
 
 profile page ui
 make private
@@ -100,4 +100,22 @@ request.resource.size < 2 * 1024 * 1024 &&
 request.resource.contentType.matches('image/.*')
 ```
 
-4:32
+[react circular progress bar ](https://www.npmjs.com/package/react-circular-progressbar)
+`npm i react-circular-progressbar`
+
+create verify function to authorize user on update route
+verify user function
+remember to install cookie-parser
+
+make update function to frontend
+create reducer for update
+- update start
+- update failed
+
+add delete route and functionality
+create modal 
+create delete methods to userSlice
+
+create logout functionality
+
+5:35
