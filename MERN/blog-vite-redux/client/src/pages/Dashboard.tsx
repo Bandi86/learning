@@ -1,6 +1,7 @@
 import DashSideBar from '../components/DashSideBar'
 import DashProfile from '../components/DashProfile'
 import useTabFromUrl from '../hooks/useTabFromUrl'
+import DashPosts from '../components/DashPosts'
 
 const Dashboard = () => {
   const tab = useTabFromUrl()
@@ -11,6 +12,8 @@ const Dashboard = () => {
         <DashSideBar />
       </div>
       {tab === 'profile' && <DashProfile />}
+      {tab === 'posts' && <DashPosts />}
+      
     </div>
   )
 }

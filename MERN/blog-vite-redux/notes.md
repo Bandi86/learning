@@ -122,10 +122,20 @@ uselogout hook
 create admin role
 add to cookie
 create post ui
-npm i react-quill --save
+`npm i react-quill --save`
 update the index.css 
 
 create create post route
 only admin can post 
 
-6:10
+show post for admin
+
+create all post route 
+dashPosts ui
+
+plugin for scroll bar table 
+`npm i tailwind-scrollbar`
+add plugin to tailwind.config
+`require('tailwind-scrollbar')`
+
+6:56

@@ -1,13 +1,21 @@
 import { Sidebar } from 'flowbite-react'
 import {
+  HiAnnotation,
   HiArrowSmRight,
-  HiUser,
+  HiChartPie,
+  HiDocumentText,
+  HiOutlineUserGroup,
+  HiUser
 } from 'react-icons/hi'
 import useTabFromUrl from '../hooks/useTabFromUrl'
 import { Link } from 'react-router-dom'
 import useLogout from '../hooks/useLogout'
+import { useSelector } from 'react-redux'
+import { UserRedux } from '../store/user/userSlice'
 
 const DashSideBar = () => {
+  const { currentUser } = useSelector((state: UserRedux) => state.user)
+
   const tab = useTabFromUrl()
   const logout = useLogout()
 
@@ -16,31 +24,55 @@ const DashSideBar = () => {
   }
 
   return (
-    <Sidebar className='w-full md:w-56'>
+    <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
-        <Sidebar.ItemGroup>
-          <Link to='/dashboard?tab=profile'>
+        <Sidebar.ItemGroup className="flex flex-col gap-1">
+          {currentUser && currentUser.isAdmin && (
+            <Link to="/dashboard?tab=dash">
+              <Sidebar.Item active={tab === 'dash' || !tab} icon={HiChartPie} as="div">
+                Dashboard
+              </Sidebar.Item>
+            </Link>
+          )}
+          <Link to="/dashboard?tab=profile">
             <Sidebar.Item
-              className='flex items-center space-x-2'
               active={tab === 'profile'}
               icon={HiUser}
-              label={'User'}
-              labelColor='dark'
-              as='div'
+              label={currentUser?.isAdmin ? 'Admin' : 'User'}
+              labelColor="dark"
+              as="div"
             >
-              <span>Profile</span>
+              Profile
             </Sidebar.Item>
           </Link>
-          <Link to='/dashboard?tab=sign-out'>
-            <Sidebar.Item
-              className='flex items-center space-x-2 cursor-pointer'
-              icon={HiArrowSmRight}
-              as='div'
-              onClick={handleLogoutClick}
-            >
-              <span>Sign Out</span>
-            </Sidebar.Item>
-          </Link>
+          {currentUser?.isAdmin && (
+            <Link to="/dashboard?tab=posts">
+              <Sidebar.Item active={tab === 'posts'} icon={HiDocumentText} as="div">
+                Posts
+              </Sidebar.Item>
+            </Link>
+          )}
+          {currentUser?.isAdmin && (
+            <>
+              <Link to="/dashboard?tab=users">
+                <Sidebar.Item active={tab === 'users'} icon={HiOutlineUserGroup} as="div">
+                  Users
+                </Sidebar.Item>
+              </Link>
+              <Link to="/dashboard?tab=comments">
+                <Sidebar.Item active={tab === 'comments'} icon={HiAnnotation} as="div">
+                  Comments
+                </Sidebar.Item>
+              </Link>
+            </>
+          )}
+          <Sidebar.Item
+            icon={HiArrowSmRight}
+            className="cursor-pointer"
+            onClick={handleLogoutClick}
+          >
+            Sign Out
+          </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

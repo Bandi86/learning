@@ -77,7 +77,7 @@ const DashProfile = () => {
     setImageFileUploadError(null)
     const storage = getStorage(app)
     const fileName = new Date().getTime() + (imageFile?.name || '')
-    const storageReference = storageRef(storage, 'images/' + fileName)
+    const storageReference = storageRef(storage, 'images/avatar' + fileName)
     const uploadTask = uploadBytesResumable(
       storageReference,
       imageFile as Blob
