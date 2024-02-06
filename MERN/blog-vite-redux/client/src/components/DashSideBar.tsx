@@ -5,9 +5,15 @@ import {
 } from 'react-icons/hi'
 import useTabFromUrl from '../hooks/useTabFromUrl'
 import { Link } from 'react-router-dom'
+import useLogout from '../hooks/useLogout'
 
 const DashSideBar = () => {
   const tab = useTabFromUrl()
+  const logout = useLogout()
+
+  const handleLogoutClick = () => {
+    logout()
+  }
 
   return (
     <Sidebar className='w-full md:w-56'>
@@ -30,6 +36,7 @@ const DashSideBar = () => {
               className='flex items-center space-x-2 cursor-pointer'
               icon={HiArrowSmRight}
               as='div'
+              onClick={handleLogoutClick}
             >
               <span>Sign Out</span>
             </Sidebar.Item>

@@ -3,11 +3,12 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom'
-import { CurrentUser } from '../types/currentUser'
+import { UserRedux } from '../store/user/userSlice'
+
 
 const PrivateRoute = () => {
   const { currentUser } = useSelector(
-    (state: CurrentUser) => state.user
+    (state: UserRedux) => state.user
   )
   return currentUser ? (
     <Outlet />

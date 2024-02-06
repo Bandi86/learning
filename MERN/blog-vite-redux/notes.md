@@ -117,5 +117,15 @@ create modal
 create delete methods to userSlice
 
 create logout functionality
+uselogout hook
 
-5:35
+create admin role
+add to cookie
+create post ui
+npm i react-quill --save
+update the index.css 
+
+create create post route
+only admin can post 
+
+6:10

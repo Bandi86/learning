@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
       default:
         'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2220431045.jpg',
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 )

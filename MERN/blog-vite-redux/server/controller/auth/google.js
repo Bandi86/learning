@@ -10,7 +10,7 @@ const google = async (req, res, next) => {
     // check if user exists
     const user = await User.findOne({ email })
     if (user) {
-      generateToken(res, user._id)
+      generateToken(res, user._id, user.isAdmin)
       const sendBack = {
         _id: user._id,
         username: user.username,
@@ -33,12 +33,13 @@ const google = async (req, res, next) => {
         profilePicture: googlePhotoUrl,
       })
       const savedUser = await newUser.save()
-      generateToken(res, savedUser._id)
+      generateToken(res, savedUser._id, savedUser.isAdmin)
       const sendBack = {
         _id: savedUser._id,
         username: savedUser.username,
         email: savedUser.email,
         profilePicture: savedUser.photo,
+        isAdmin: savedUser.isAdmin,
         createdAt: savedUser.createdAt,
         updatedAt: savedUser.updatedAt,
       }

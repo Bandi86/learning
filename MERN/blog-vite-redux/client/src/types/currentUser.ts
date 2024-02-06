@@ -3,5 +3,6 @@ export type User = {
   username: string
   email: string
   profilePicture: string
-  password?: string  
+  password?: string
+  isAdmin?: boolean
 }

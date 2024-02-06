@@ -1,8 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import SignUp from './pages/SignUp'
@@ -12,6 +8,8 @@ import FooterComp from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import Projects from './pages/Projects'
 import Dashboard from './pages/Dashboard'
+import AdminRoute from './components/AdminRoute'
+import CreatePost from './pages/CreatePost'
 
 function App() {
   return (
@@ -19,28 +17,16 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route
-          path='/about'
-          element={<About />}
-        />
-        <Route
-          path='/sign-up'
-          element={<SignUp />}
-        />
-        <Route
-          path='/sign-in'
-          element={<SignIn />}
-        />
-        <Route element={<PrivateRoute />}>
-          <Route
-            path='/dashboard'
-            element={<Dashboard />}
-          />
+        <Route path='/about' element={<About />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route element={<AdminRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
         </Route>
-        <Route
-          path='/projects'
-          element={<Projects />}
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
+        <Route path='/projects' element={<Projects />} />
       </Routes>
       <FooterComp />
     </BrowserRouter>
