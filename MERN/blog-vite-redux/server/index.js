@@ -7,6 +7,7 @@ import db from './db/connect.js'
 import postRouter from './routes/post.js'
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
+import { verifyUser } from './utils/verifyUser.js'
 
 const app = express()
 
@@ -33,7 +34,7 @@ app.use(express.urlencoded({ extended: true }))
 
 const PORT = process.env.PORT
 
-app.use('/api/users', userRouter)
+app.use('/api/users', verifyUser, userRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/auth', authRouter)
 app.use((err, req, res, next) => {

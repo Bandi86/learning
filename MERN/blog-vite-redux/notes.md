@@ -138,4 +138,7 @@ plugin for scroll bar table
 add plugin to tailwind.config
 `require('tailwind-scrollbar')`
 
-6:56
+delete and edit post methods
+all user endpoint
+
+7:34
