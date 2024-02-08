@@ -7,7 +7,7 @@ import db from './db/connect.js'
 import postRouter from './routes/post.js'
 import userRouter from './routes/user.js'
 import authRouter from './routes/auth.js'
-import { verifyUser } from './utils/verifyUser.js'
+import commentRouter from './routes/comment.js'
 
 const app = express()
 
@@ -21,7 +21,7 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 200,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type, Authorization',
+  allowedHeaders: 'Content-Type, Authorization'
 }
 
 app.use(cors(corsOptions))
@@ -34,17 +34,18 @@ app.use(express.urlencoded({ extended: true }))
 
 const PORT = process.env.PORT
 
-app.use('/api/users', verifyUser, userRouter)
+app.use('/api/users', userRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/comments', commentRouter)
+
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500
-  const message =
-    err.message || 'Internal Server Error'
+  const message = err.message || 'Internal Server Error'
   res.status(statusCode).json({
     success: false,
     statusCode,
-    message,
+    message
   })
 })
 
@@ -52,9 +53,7 @@ const start = async () => {
   try {
     await db()
     app.listen(PORT, () => {
-      console.log(
-        `Server is running on port ${PORT}.`
-      )
+      console.log(`Server is running on port ${PORT}.`)
     })
   } catch (error) {
     console.log(`Error: ${error.message}`)

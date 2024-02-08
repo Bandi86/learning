@@ -11,10 +11,13 @@ import Dashboard from './pages/Dashboard'
 import AdminRoute from './components/AdminRoute'
 import CreatePost from './pages/CreatePost'
 import UpdatePost from './pages/UpdatePost'
+import PostPage from './pages/PostPage'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -29,6 +32,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
       <FooterComp />
     </BrowserRouter>

@@ -1,12 +1,21 @@
 import User from '../../model/user.model.js'
+import { errorHandler } from '../../utils/error.js'
 
-const userById = async (req, res) => {
-  const { id } = req.params
+const userById = async (req, res, next) => {
+  const { userId } = req.params
+
+  let _id = userId
   try {
-    const user = await User.findById(id)
+    if (!userId) {
+      return next(errorHandler(404, 'provide a valid user id'))
+    }
+    const user = await User.findById(_id.select('-password'))
+    if (!user) {
+      return next(errorHandler(404, 'user not found'))
+    }
     res.status(200).json({ user })
   } catch (error) {
-    console.log(`Error: ${error.message}`)
+    next(error)
   }
 }
 

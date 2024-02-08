@@ -109,11 +109,12 @@ remember to install cookie-parser
 
 make update function to frontend
 create reducer for update
+
 - update start
 - update failed
 
 add delete route and functionality
-create modal 
+create modal
 create delete methods to userSlice
 
 create logout functionality
@@ -123,17 +124,17 @@ create admin role
 add to cookie
 create post ui
 `npm i react-quill --save`
-update the index.css 
+update the index.css
 
 create create post route
-only admin can post 
+only admin can post
 
 show post for admin
 
-create all post route 
+create all post route
 dashPosts ui
 
-plugin for scroll bar table 
+plugin for scroll bar table
 `npm i tailwind-scrollbar`
 add plugin to tailwind.config
 `require('tailwind-scrollbar')`
@@ -141,4 +142,16 @@ add plugin to tailwind.config
 delete and edit post methods
 all user endpoint
 
-7:34
+post page ui
+
+call to action component
+
+comment section
+make scroll to top component and import it to app
+
+create comment model and the routes for that
+comments ui
+moment package
+`npm i moment`
+
+9:03
