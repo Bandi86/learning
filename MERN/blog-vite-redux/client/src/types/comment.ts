@@ -7,6 +7,6 @@ export type Comment = {
   content: string | null
   likes: Like[] | null
   numberOfLikes: number
-  createdAt: Date | null
-  updatedAt: Date | null
+  createdAt: string
+  updatedAt: string
 }

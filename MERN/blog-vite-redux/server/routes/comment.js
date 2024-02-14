@@ -9,7 +9,7 @@ import likeComment from '..controller/comment/likeComment.js'
 
 const router = express.Router()
 
-router.get('/', getAllComments)
+router.get('/', verifyUser, getAllComments)
 router.get('/:postId', getCommentById)
 router.post('/', verifyUser, createComment)
 router.put('/likeComment/:commentId', verifyUser, likeComment)

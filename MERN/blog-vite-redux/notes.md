@@ -159,4 +159,8 @@ edit function
 delete function
 
 recent article section to the post page
-9:49
+line clamp plugin
+https://github.com/tailwindlabs/tailwindcss-line-clamp
+
+comments to admin panel
+10:27
