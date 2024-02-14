@@ -163,4 +163,7 @@ line clamp plugin
 https://github.com/tailwindlabs/tailwindcss-line-clamp
 
 comments to admin panel
-10:27
+
+upload the project
+
+11:38

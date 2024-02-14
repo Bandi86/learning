@@ -7,7 +7,7 @@ import { verifyUser } from '../utils/verifyUser.js'
 
 const router = express.Router()
 
-router.get('/', getAllUser)
+router.get('/', verifyUser, getAllUser)
 router.get('/:userId', getUserById)
 router.patch('/:userId', verifyUser, updateUser)
 router.delete('/:userId', verifyUser, deleteUser)

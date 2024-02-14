@@ -4,6 +4,8 @@ import Comment from '../../model/comment.model.js'
 const createComment = async (req, res, next) => {
   const { content, userId, postId } = req.body
 
+  //console.log(userId, req.user._id)
+
   try {
     if (!content || !postId || !userId) {
       return next(errorHandler(400, 'Invalid input. Please provide all required fields.'))
